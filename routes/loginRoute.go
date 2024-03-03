@@ -1,10 +1,10 @@
 package routes
 
 import (
+	"GoLinkTree/models"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"GoLinkTree/models"
 )
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
@@ -17,15 +17,15 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Check if username and password are correct
-		if user.Username == "admin" && user.Password == "password" {
-			// Return a success response
-			w.WriteHeader(http.StatusOK)
-			fmt.Fprintf(w, "Login successful")
+		exists, err := models.CheckUserExists(user.Username, user.Password)
+
+		if err != nil {
+			http.Error(w, "Error occured in user authentication", http.StatusBadRequest)
 		} else {
-			// Return an error response
-			w.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprintf(w, "Invalid username or password")
+			if exists {
+				w.WriteHeader(http.StatusAccepted)
+				fmt.Fprintf(w, "Successfully logged in user")
+			}
 		}
 	} else {
 		// Return an error response for unsupported methods

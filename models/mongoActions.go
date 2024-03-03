@@ -8,18 +8,16 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func CheckUserExists(username string, password string) (string, error){
+func CheckUserExists(username string, password string) (bool, error){
 	client, err := ConnectToMongoDB();
 
 	if(err != nil) {
-		return "", err
+		return false, err
 	}
 	defer client.Disconnect(context.Background())
 	
-	// Get the Users collection
-	usersCollection := client.Database("yourdbname").Collection("Users")
+	usersCollection := client.Database("GoLinkTree").Collection("Users")
 
-	// Find the user by username and password
 	var user bson.M
 	err = usersCollection.FindOne(context.TODO(), bson.D{
 		{Key: "username", Value: username},
@@ -27,13 +25,10 @@ func CheckUserExists(username string, password string) (string, error){
 	}).Decode(&user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			// User does not exist
-			return "", fmt.Errorf("user not found")
+			return false, fmt.Errorf("user not found")
 		}
-		return "", err
+		return false, err
 	}
 
-	// User exists
-	return "user exists", nil
-
+	return true, nil
 }

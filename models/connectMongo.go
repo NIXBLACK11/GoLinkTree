@@ -4,20 +4,25 @@ import (
 	"GoLinkTree/custom"
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/joho/godotenv"
 )
 
 func ConnectToMongoDB() (*mongo.Client, error) {
 
-	DATABASE_URL := os.Getenv("DATABASE_URL")
+    err := godotenv.Load()
+    if err != nil {
+        return nil, err
+    }
+
+    DATABASE_URL := os.Getenv("DATABASE_URL")
+	
 	if DATABASE_URL == "" {
 		err := custom.MyError("DATABASE URL not found in env")
-		log.Fatal("Error getting DATABASE_URL:")
 		return nil, err
 	}
 
