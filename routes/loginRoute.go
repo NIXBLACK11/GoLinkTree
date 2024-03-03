@@ -2,6 +2,7 @@ package routes
 
 import (
 	"GoLinkTree/models"
+	"GoLinkTree/jwt"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -23,8 +24,15 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Error occured in user authentication", http.StatusBadRequest)
 		} else {
 			if exists {
+				token, err = jwt.CreateToken(user.Username)
+				if err != nil {
+					http.Error(w, "Error in user authentication")
+				}
 				w.WriteHeader(http.StatusAccepted)
 				fmt.Fprintf(w, "Successfully logged in user")
+			} else {
+				w.WriteHeader(http.StatusExpectationFailed)
+				fmt.Fprintf(w, "User does not exist")
 			}
 		}
 	} else {
