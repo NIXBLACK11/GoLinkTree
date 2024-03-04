@@ -21,15 +21,30 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		exists, err := models.CheckUserExists(user.Username, user.Password)
 
 		if err != nil {
-			http.Error(w, "Error occured in user authentication", http.StatusBadRequest)
+			http.Error(w, "Error occurred in user authentication", http.StatusBadRequest)
 		} else {
 			if exists {
-				token, err = jwt.CreateToken(user.Username)
+				token, err := jwt.CreateToken(user.Username)
 				if err != nil {
-					http.Error(w, "Error in user authentication")
+					http.Error(w, "Error in user authentication", http.StatusBadRequest)
 				}
-				w.WriteHeader(http.StatusAccepted)
-				fmt.Fprintf(w, "Successfully logged in user")
+
+				// Create a map to hold the response data
+				response := map[string]string{"token": "Bearer " + token}
+
+				// Marshal the response into JSON
+				responseJSON, err := json.Marshal(response)
+				if err != nil {
+					http.Error(w, "Failed to create response", http.StatusInternalServerError)
+					return
+				}
+
+				// Set the Content-Type header
+				w.Header().Set("Content-Type", "application/json")
+
+				// Write the JSON response to the client
+				w.WriteHeader(http.StatusOK)
+				w.Write(responseJSON)
 			} else {
 				w.WriteHeader(http.StatusExpectationFailed)
 				fmt.Fprintf(w, "User does not exist")

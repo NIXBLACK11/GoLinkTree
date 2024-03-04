@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoLinkTree/routes"
+	"GoLinkTree/middlewares"
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
@@ -13,7 +14,7 @@ func main() {
 	port := 8080
 
 	// Add route for the login API
-	mux.HandleFunc("/login", routes.LoginHandler)
+	mux.HandleFunc("/login", middlewares.AuthorizationMiddleware(routes.LoginHandler))
 
 	// Add route for the user page
 	mux.HandleFunc("/{username}", routes.UserPage)
