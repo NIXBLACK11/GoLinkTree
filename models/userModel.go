@@ -10,7 +10,6 @@ type Auth struct {
 	Username string `json:"username"`
 }
 
-type LinkDetails struct {
-	Name string `json:"name"`
-	Link string `json:"link"`
+type UserLinks struct {
+	Links []map[string]string `bson:"Links"`
 }
