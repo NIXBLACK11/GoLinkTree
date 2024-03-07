@@ -14,13 +14,13 @@ func main() {
 	port := 8080
 
 	// Add route for the login API
-	mux.HandleFunc("/login", middlewares.AuthorizationMiddleware(routes.LoginHandler))
+	mux.HandleFunc("/login", routes.LoginHandler)
 
 	// Add route for the user page
-	mux.HandleFunc("/{username}", routes.UserPage)
+	mux.HandleFunc("/{username}", middlewares.AuthorizationMiddleware(routes.UserPage))
 
 	//Add route for the user to enter details
-	mux.HandleFunc("/{username}/setDetails", routes.SetDetails)
+	
 
 	// Start the server on port 8080
 	log.Printf("Server listening on port %d", port)

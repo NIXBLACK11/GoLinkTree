@@ -7,4 +7,10 @@ type User struct {
 
 type Auth struct {
 	Token string `json:"token"`
+	Username string `json:"username"`
+}
+
+type LinkDetails struct {
+	Name string `json:"name"`
+	Link string `json:"link"`
 }
