@@ -19,8 +19,11 @@ func main() {
 	// Add route for the user page
 	mux.HandleFunc("/{username}", middlewares.AuthorizationMiddleware(routes.UserPage))
 
-	//Add route for the user to enter details
-	
+	// Add route for the user to enter details
+	mux.HandleFunc("/{username}/addDetails", middlewares.AuthorizationMiddleware(routes.AddDetails))
+
+	// Add route fot the user to delete details
+	mux.HandleFunc("/{username}/removeDetails", middlewares.AuthorizationMiddleware(routes.RemoveDetails))
 
 	// Start the server on port 8080
 	log.Printf("Server listening on port %d", port)

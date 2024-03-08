@@ -2,10 +2,7 @@ package middlewares
 
 import (
 	"GoLinkTree/jwt"
-	"GoLinkTree/models"
-	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 
@@ -14,31 +11,33 @@ import (
 
 func AuthorizationMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		
-		var auth models.Auth
-		err := json.NewDecoder(r.Body).Decode(&auth)
-		if err != nil {
-			http.Error(w, "Failed to parse request body", http.StatusBadRequest)
+		// Extract token from Authorization header
+		authHeader := r.Header.Get("Authorization")
+		if authHeader == "" {
+			http.Error(w, "Authorization header is missing", http.StatusUnauthorized)
 			return
 		}
-		
-		// Extract the username from the parameters and token from the json data
+
+		// Split the Authorization header to get the token
+		tokenParts := strings.Split(authHeader, " ")
+		if len(tokenParts) != 2 || tokenParts[0] != "Bearer" {
+			http.Error(w, "Invalid authorization header", http.StatusUnauthorized)
+			return
+		}
+		token := tokenParts[1]
+
+		// Extract the username from the request
 		vars := mux.Vars(r)
 		username := vars["username"]
-		Bearertoken := auth.Token
 
-		token := strings.Split(Bearertoken, " ")[1]
-
+		// Validate the token
 		check, err := jwt.AuthToken(username, token)
-		
-		log.Println(err)
-
-		if(err!=nil) {
+		if err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 			return
 		}
-		
-		if(!check) {
+
+		if !check {
 			http.Error(w, "Invalid username", http.StatusBadRequest)
 			return
 		}

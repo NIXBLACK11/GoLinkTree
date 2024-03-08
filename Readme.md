@@ -16,5 +16,5 @@ touch routes.go
 example JWT Token
 
 ```cpp
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDk2NDY5MjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.vYutO5GCJ0wkI-SLNGdFodEejOBBGHrutsItAIu37Lg
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDk5ODIyNzcsInVzZXJuYW1lIjoiYWRtaW4ifQ.ZBOSTsrrwsoQ-l6Ds1xFvft3yuQ_cP913-alFUvv3sA
 ```

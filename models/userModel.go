@@ -7,9 +7,13 @@ type User struct {
 
 type Auth struct {
 	Token string `json:"token"`
-	Username string `json:"username"`
 }
 
 type UserLinks struct {
 	Links []map[string]string `bson:"Links"`
+}
+
+type Link struct {
+	Name string `json:"name"`
+	URL string `json:"url"`
 }
