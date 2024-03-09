@@ -13,6 +13,9 @@ func main() {
 	mux := mux.NewRouter()
 	port := 8080
 
+	// Add route to signup user
+	mux.HandleFunc("/signup", routes.Signinhandler)
+
 	// Add route for the login API
 	mux.HandleFunc("/login", routes.LoginHandler)
 

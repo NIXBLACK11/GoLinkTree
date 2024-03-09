@@ -3,7 +3,6 @@ package models
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -26,9 +25,9 @@ func CheckUserExists(username string, password string) (bool, error){
 	}).Decode(&user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return false, fmt.Errorf("user not found")
+			return false, nil
 		}
-		return false, err
+		return false, nil
 	}
 
 	return true, nil
@@ -109,6 +108,23 @@ func DeleteLink(username string, Link RemLink) (bool, error) {
 	if result.ModifiedCount == 0 {
 		// If no documents were modified, it means the link wasn't found
 		return false, nil
+	}
+
+	return true, nil
+}
+
+func CreateUser(user User) (bool, error) {
+	client, err := ConnectToMongoDB()
+	if err != nil {
+		return false, err
+	}
+	defer client.Disconnect(context.Background())
+
+	usersCollection := client.Database("GoLinkTree").Collection("Users")
+
+	_, err = usersCollection.InsertOne(context.Background(), user)
+	if err != nil {
+		return false, err
 	}
 
 	return true, nil
