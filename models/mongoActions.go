@@ -81,3 +81,35 @@ func InsertLink(username string, link Link) (bool, error) {
 
 	return true, nil
 }
+
+func DeleteLink(username string, Link RemLink) (bool, error) {
+	client, err := ConnectToMongoDB()
+	if err != nil {
+		return false, err
+	}
+	defer client.Disconnect(context.Background())
+
+	usersCollection := client.Database("GoLinkTree").Collection("Users")
+
+	// Define filter to identify the document to update
+	filter := bson.M{"username": username}
+
+	linkName := Link.Name
+
+	// Define update operation to remove the link from the array
+	update := bson.M{"$pull": bson.M{"Links": bson.M{linkName: bson.M{"$exists": true}}}}
+
+	// Perform update operation
+	result, err := usersCollection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		return false, err
+	}
+
+	// Check if any documents matched the filter criteria
+	if result.ModifiedCount == 0 {
+		// If no documents were modified, it means the link wasn't found
+		return false, nil
+	}
+
+	return true, nil
+}

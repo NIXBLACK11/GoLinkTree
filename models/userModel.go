@@ -17,3 +17,7 @@ type Link struct {
 	Name string `json:"name"`
 	URL string `json:"url"`
 }
+
+type RemLink struct {
+	Name string `json:"name"`
+}
