@@ -13,13 +13,13 @@ import (
 )
 
 func ConnectToMongoDB() (*mongo.Client, error) {
+	
+	err := godotenv.Load()
+	if err != nil {
+		return nil, err
+	}
 
-    err := godotenv.Load()
-    if err != nil {
-        return nil, err
-    }
-
-    DATABASE_URL := os.Getenv("DATABASE_URL")
+	DATABASE_URL := os.Getenv("DATABASE_URL")
 	
 	if DATABASE_URL == "" {
 		err := custom.MyError("DATABASE URL not found in env")
@@ -35,7 +35,6 @@ func ConnectToMongoDB() (*mongo.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	// Check the connection
 	err = client.Ping(ctx, nil)
 	if err != nil {
