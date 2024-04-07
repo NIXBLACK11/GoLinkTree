@@ -1,7 +1,11 @@
-import { Quote } from "../components/Quote"
+import { SignupForm } from "../components/SignupForm";
 
 export const Signup = () => {
-    return <div>
-        <Quote/>
-    </div>
-}
+  return (
+    <>
+      <div className="">
+        <SignupForm/>
+      </div>
+    </>
+  );
+};
