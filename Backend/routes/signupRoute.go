@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func Signinhandler(w http.ResponseWriter, r *http.Request) {
+func Signuphandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		var user models.User
 		err := json.NewDecoder(r.Body).Decode(&user)
