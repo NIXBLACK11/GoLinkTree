@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/handlers"
 )
 
 func main() {
@@ -25,12 +26,17 @@ func main() {
 	// Add route for the user to enter details
 	mux.HandleFunc("/{username}/addDetails", middlewares.AuthorizationMiddleware(routes.AddDetails))
 
-	// Add route fot the user to delete details
+	// Add route for the user to delete details
 	mux.HandleFunc("/{username}/removeDetails", middlewares.AuthorizationMiddleware(routes.RemoveDetails))
+
+	// CORS middleware
+	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
+	origins := handlers.AllowedOrigins([]string{"*"})
+	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"})
 
 	// Start the server on port 8080
 	log.Printf("Server listening on port %d", port)
-	err := http.ListenAndServe(":8080", mux)
+	err := http.ListenAndServe(":8080", handlers.CORS(headers, origins, methods)(mux))
 	if err != nil {
 		log.Fatal("Error starting server:", err)
 	}

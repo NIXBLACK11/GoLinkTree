@@ -1,10 +1,10 @@
-interface AlertProps {
+export interface AlertProps {
     type: 'success' | 'info' | 'error' | 'warning';
     heading: string;
     data: string;
 }
 
-export const Alert = ({type, heading, data }: AlertProps) => {
+export const Alert = ({ type, heading, data }: AlertProps) => {
 
     const renderAlertMessage = () => {
         switch (type) {
