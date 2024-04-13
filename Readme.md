@@ -1,4 +1,7 @@
 # GoLinkTree
+
+![Alt text](image.png)
+
 **Project Name:** GoLinkTree
 
 **Description:**
