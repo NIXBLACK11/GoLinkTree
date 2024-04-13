@@ -20,15 +20,16 @@ GoLinkTree is a robust web application designed to help users organize and share
 - **RESTful API:** Communication protocol for seamless interaction between the frontend and backend components.
 
 **Getting Started:**
-1. **Clone Repository:** Clone the GoLinkTree repository from [GitHub Repo URL].
+1. **Clone Repository:** Clone the GoLinkTree repository from [https://github.com/NIXBLACK11/GoLinkTree.git].
 2. **Database Setup:** Install and configure MongoDB, then update the database connection details in the backend.
 3. **Start Backend Server:** Navigate to the `backend` directory and run `go run ./` to start the GoLang backend server.
-4. **Start Frontend Development Server:** Navigate to the `frontend` directory and run `npm install` followed by `npm start` to start the React frontend development server.
-5. **Access Application:** Open your web browser and navigate to `http://localhost:3000` to access the GoLinkTree application.
+4. **Start Frontend Development Server:** Navigate to the `frontend` directory and run `npm install` followed by `npm run dev` to start the React frontend development server.
+5. **Access Application:** Open your web browser and navigate to `http://localhost:5173` to access the GoLinkTree application.
+
+The frontend code for GoLinkTree is hosted in this [repository](https://github.com/NIXBLACK11/LinkTreeFrontend).
 
 **Contributing:**
 Contributions to GoLinkTree are welcome! If you'd like to contribute, fork the repository, make your changes, and submit a pull request. Please adhere to the existing code style and guidelines.
-
 
 **Contact:**
 For questions or inquiries about the project, feel free to contact the project maintainer at [siddharthsinghrana11@gmail.com].
