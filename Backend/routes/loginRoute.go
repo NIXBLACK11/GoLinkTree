@@ -17,7 +17,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Failed to parse request body", http.StatusBadRequest)
 			return
 		}
-
+		fmt.Println(user.Password, user.Username)
 		exists, err := models.CheckUserExists(user.Username, user.Password)
 
 		if err != nil {
@@ -46,7 +46,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusOK)
 				w.Write(responseJSON)
 			} else {
-				w.WriteHeader(http.StatusExpectationFailed)
+				w.WriteHeader(http.StatusBadRequest)
 				fmt.Fprintf(w, "User does not exist")
 			}
 		}
