@@ -29,6 +29,9 @@ func main() {
 	// Add route for the user to delete details
 	mux.HandleFunc("/{username}/removeDetails", middlewares.AuthorizationMiddleware(routes.RemoveDetails))
 
+	// Add route to validate the user in the user page
+	mux.HandleFunc("/{username}/validate", middlewares.AuthorizationMiddleware(routes.ValidUser))
+
 	// CORS middleware
 	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
 	origins := handlers.AllowedOrigins([]string{"*"})
