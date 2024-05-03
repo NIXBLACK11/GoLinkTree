@@ -21,7 +21,7 @@ func main() {
 	mux.HandleFunc("/login", routes.LoginHandler)
 
 	// Add route for the user page
-	mux.HandleFunc("/{username}", middlewares.AuthorizationMiddleware(routes.UserPage))
+	mux.HandleFunc("/{username}", routes.UserPage)
 
 	// Add route for the user to enter details
 	mux.HandleFunc("/{username}/addDetails", middlewares.AuthorizationMiddleware(routes.AddDetails))
