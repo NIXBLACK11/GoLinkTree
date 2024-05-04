@@ -38,7 +38,7 @@ Contributions to GoLinkTree are welcome! If you'd like to contribute, fork the r
 For questions or inquiries about the project, feel free to contact the project maintainer at [siddharthsinghrana11@gmail.com].
 
 
-```bash
+<!-- ```bash
 go mod init GoLinkTree
 mkdir -p bin cmd/goProjectStructure internal tests
 touch Makefile
@@ -46,4 +46,4 @@ touch cmd/goProjectStructure/main.go
 mkdir routes
 cd routes
 touch routes.go
-```
+``` -->
