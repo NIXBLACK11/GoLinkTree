@@ -47,3 +47,6 @@ mkdir routes
 cd routes
 touch routes.go
 ``` -->
+
+DATABASE_URL=mongodb+srv://NIXBLACK:nixblack11@cluster0.tk5azpj.mongodb.net/
+SECRET_KEY=lmfaxy

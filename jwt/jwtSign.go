@@ -6,14 +6,14 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 )
 
 func CreateToken(username string) (string, error){
-	err := godotenv.Load()
-    if err != nil {
-        return "", err
-    }
+	// err := godotenv.Load()
+    // if err != nil {
+    //     return "", err
+    // }
 
     SECRET_KEY := os.Getenv("SECRET_KEY")
 	

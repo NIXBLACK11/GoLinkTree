@@ -6,14 +6,14 @@ import (
 	"os"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 )
 
 func AuthToken(username string, token string) (bool, error) {
-	err := godotenv.Load()
-	if err != nil {
-		return false, err
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	return false, err
+	// }
 
 	SECRET_KEY := os.Getenv("SECRET_KEY")
 
