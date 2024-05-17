@@ -1,6 +1,6 @@
 # GoLinkTree
 
-**Test the [project](https://link-tree-frontend.vercel.app/user/test)**
+**Test the [project](https://link-tree-frontend.vercel.app)**
 
 ![Alt text](image.png)
 
