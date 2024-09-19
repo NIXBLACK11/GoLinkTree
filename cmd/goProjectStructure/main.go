@@ -23,7 +23,7 @@ func main() {
 	port := 8080
 
 	// Add test route
-	mux.HandleFunc("/", routes.TestRoute)
+	mux.HandleFunc("/testRoute", routes.TestRoute)
 
 	// Add route to signup user
 	mux.HandleFunc("/signup", routes.Signuphandler)
